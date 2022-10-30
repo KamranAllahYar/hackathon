@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { AppointmentsService } from './appointments.service';
 import { CreateAppointmentDto } from './dto/create-appointment.dto';
 
@@ -11,8 +11,8 @@ export class AppointmentsController {
     return this.appointmentsService.create(createAppointmentDto);
   }
 
-  @Get()
-  findAll() {
-    return this.appointmentsService.findAll();
+  @Get(':id')
+  find(@Param('id') id: string) {
+    return this.appointmentsService.findOne(+id);
   }
 }
